@@ -126,29 +126,18 @@
 class list:
     def __init__(self):
         pass
-    def method(n):                            ############################################################
-        temp = [0]*n                            ######################  Baler problem  ######################
-        stacks = n*n                         #############################################################
-        arr = ([0]*stacks)+[0]*(n-1)
-        initial = 1
-        end=n+1
-        for i in range(1, n+1):
-            c = 0
-            for j in range(1, n+1):
-                temp[-j] = j
-            for j in range(initial, end):
-                arr[j] = temp[c]
-                if c < n:
-                    c+= 1
+    def method(n):                   
+        stacks = n*n                   
+        arr = ([0]*stacks)
+        c = 1
+        for i in range(n-1, stacks, n):
+            for j in range(c):
+                arr[i-j] = j+1
+            c+=1
                 
-            arr[end] = " "
-            initial = end
-            if stacks < end:
-                end = end+3
-        print(arr)
+        return arr
 
-list.method(int(input("please enter a number: "))) 
-
+print(list.method(int(input("please enter a number: "))))
 ################################# Task 9  ##################################
 # class cls:
 #     def __init__(self):
