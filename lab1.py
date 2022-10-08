@@ -123,21 +123,21 @@
 # print(split(source))
 
 #############################  Task 8  ###################################
-class list:
-    def __init__(self):
-        pass
-    def method(n):                   
-        stacks = n*n                   
-        arr = ([0]*stacks)
-        c = 1
-        for i in range(n-1, stacks, n):
-            for j in range(c):
-                arr[i-j] = j+1
-            c+=1
+# class list:
+#     def __init__(self):
+#         pass
+#     def method(n):                   
+#         stacks = n*n                   
+#         arr = ([0]*stacks)
+#         c = 1
+#         for i in range(n-1, stacks, n):
+#             for j in range(c):
+#                 arr[i-j] = j+1
+#             c+=1
                 
-        return arr
+#         return arr
 
-print(list.method(int(input("please enter a number: "))))
+# print(list.method(int(input("please enter a number: "))))
 ################################# Task 9  ##################################
 # class cls:
 #     def __init__(self):
