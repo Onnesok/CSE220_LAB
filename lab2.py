@@ -1,11 +1,19 @@
+#####################################################################
+######################## Circular array  ###################################
+######################################################################
+
+
 class CircularArray:
   def __init__(self, lin, st, sz):
     # Initializing Variables
     self.start = st
     self.size = sz
-    self.cir = []
-    self.lin = lin
-    self.flag = 0
+    self.cir = [None]*len(lin)
+
+    idx = self.start
+    for i in range(len(lin)):
+      self.cir[idx] = lin[i]
+      idx = (idx+1)%len(lin)
     
     # if lin = [10, 20, 30, 40, None]
     # then, CircularArray(lin, 2, 4) will generate
@@ -14,99 +22,144 @@ class CircularArray:
     # To Do. 
     # Hints: set the values for initialized variables
   
+  ################################################################
   # Print from index 0 to len(cir) - 1
   def printFullLinear(self): #Easy
     # To Do
-    if self.flag == 0:
-      i = 0
-      temp = self.start + 1
-      self.cir = [None]*len(self.lin)
-      
-      while (i < len(self.lin)):
-        self.cir[i] = self.lin[temp]
-        temp += 1
-        i+= 1
-        if temp == len(self.lin):
-          temp = 0
-
-      print(self.cir)
-    elif self.flag != 0:
-      print(self.cir)
+    for i in range(len(self.cir)):
+      if i < len(self.cir)-1:
+        print(self.cir[i], end = ", ")
+      else:
+        print(self.cir[i], end=" ")
+    print()
   
+  #################################################################
   # Print from start index and total size elements
   def printForward(self): #Easy
     # To Do
-    st = 0
-    self.cir = [0]*self.size
-
-    for i in range(st, self.size, 1):
-      self.cir[i] = self.lin[st]
-      st += 1
-    print(self.cir)
+    temp = self.start
+    for i in range(self.size):
+      if i < self.size - 1:
+        print(self.cir[temp],end=", ")
+        temp = (temp+1)%len(self.cir)
+      else:
+        print(self.cir[temp],end = " ")
+    print()
 
   
+  #################################################################
   def printBackward(self): #Easy
     # To Do
-    st = self.size-1
-    self.cir = [0]*self.size
-    for i in range(0, self.size, 1):
-      self.cir[i] = self.lin[st]
-      st -= 1
-    print(self.cir)
+    temp = ((self.start + self.size)-1)%len(self.cir)
+    for i in range(self.size):
+      if i < self.size - 1:
+        print(self.cir[temp], end=", ")
+        temp = temp -1
+        if temp == -1:
+          temp = len(self.cir) - 1
+      else:
+        print(self.cir[temp], end = " ")
+    print()
   
+  
+  #################################################################
   # With no null cells
   def linearize(self): #Medium
     # To Do
-    st = 0
-    self.cir = [0]*self.size
-
-    for i in range(st, self.size, 1):
-      self.cir[i] = self.lin[st]
-      st += 1
-    self.flag += 1
+    lin_arr = [None]*self.size
+    temp = self.start
+    for i in range(self.size):
+      lin_arr[i] = self.cir[temp]
+      temp = (temp+1)%len(self.cir)
+    self.cir = lin_arr
   
+  
+  #################################################################
   # Do not change the Start index
   def resizeStartUnchanged(self, newcapacity): #Medium
     # To Do
-    pass # Remove this line
+    new_arr = [None]*newcapacity
+    idx = self.start
+
+    for i in range(self.size):
+      new_arr[idx] = self.cir[idx%len(self.cir)]
+      idx = (idx + 1)
+    self.cir = new_arr
   
+
+  
+  #################################################################
   # This method will check whether the array is palindrome or not
   def palindromeCheck(self): #Hard
     # To Do
-    pass # Remove this line
+    flag=1
+    temp=self.start
+    j=(self.start+self.size-1)%len(self.cir)
+    for i in range(self.size//2):
+      if self.cir[temp%len(self.cir)]!=self.cir[j]:
+        flag=0
+        break
+      else:
+        temp=temp+1
+        j=j-1
+        flag=1
+    if flag==0:
+      print("This array is NOT a Palindrome")
+    else:
+      print("This array is a Palindrome")
 
+
+
+  #################################################################
   # This method will sort the values by keeping the start unchanged
   def sort(self):
     # To Do
-    pass # Remove this line
-  
+    for i in range(self.size):
+      for j in range(i+1, self.size):
+        x = (i+self.start)%len(self.cir)
+        y = (j + self.start)%len(self.cir)
+
+        if (self.cir[x] > self.cir[y]):
+          temp = self.cir[x]
+          self.cir[x] = self.cir[y]
+          self.cir[y] = temp
+
+
+
+  #################################################################
   # This method will check the given array across the base array and if they are equivalent interms of values return true, or else return false
   def equivalent(self, cir_arr):
     # To Do
-    pass # Remove this line
+   flag=0
+   for i in range(len(cir_arr.cir)):
+     if cir_arr.cir[i] not in self.cir:
+       flag=1
+       break
 
+   if flag==1:
+     return False
+   else:
+     return True
+
+
+
+  #################################################################
   # the method take another circular array and returns a linear array containing the common elements between the two circular arrays.
   def intersection(self, c2):
     # To Do
-    pass # Remove this line
+   empty_arr=[]
+   for i in c2.cir:
+     if i in self.cir and i!=None:
+       empty_arr.append(i)
+     else:
+       continue
+   return empty_arr
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#####################################################################################
+#########################$$$$$$$$$$ Driver code $$$$$$$$$$###########################
+####################################################################################
 # Tester class. Run this cell after completing methods in the upper cell and
 # check the output
 
