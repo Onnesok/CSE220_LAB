@@ -21,78 +21,205 @@ class LinkedList:
   # Hint: Use the type() function to determine the data type of a
     self.head = None
     # To Do
-    pass # Remove this line
+    self.a = a
+    if type(a) == list:
+      t = Node(a[0], None)
+      self.head = t
+      h = self.head
+
+      for i in range(1, len(a)):
+        t = Node(a[i], None)
+        h.next = t
+        h = t
+
+    elif type(a) == Node:
+      self.head = a
   
   # Count the number of nodes in the list
   def countNode(self):
     # To Do
-    pass # Remove this line
+    cnt = 0
+    t = self.head
+    while t is not None:
+      cnt += 1
+      t=t.next
+    self.count = cnt
+    return self.count
   
   # Print elements in the list
   def printList(self):
+    pass
     # To Do
-    pass # Remove this line
+    t = self.head
+    while t != None:
+      if t.next != None:
+        print(t.element, end=", ")
+      else:
+        print(t.element)
+      t = t.next
 
   # returns the reference of the Node at the given index. For invalid index return None.
   def nodeAt(self, idx):
     # To Do
-    pass # Remove this line
+    if idx < 0 or idx >= len(self.a):
+      return None
+    else:
+      t = self.head
+      c = 0
+      while c != idx:
+        t = t.next
+        c+= 1
+      return t
   
   # returns the element of the Node at the given index. For invalid idx return None.
   def get(self, idx):
     # To Do
-    pass # Remove this line
+    if idx < 0 or idx >= self.count:
+      return None
+    else:
+      t = self.head
+      c = 0
+      while c != idx:
+        t = t.next
+        c+= 1
+      return t.element
   
   # updates the element of the Node at the given index. 
   # Returns the old element that was replaced. For invalid index return None.
   # parameter: index, element
   def set(self, idx, elem):
     # To Do
-    pass # Remove this line
+    t = self.head
+    i = 0
+    temp = 0
+    while t != None:
+      if i == idx:
+        temp = t.element
+        t.element = elem
+        return temp
+      i = i + 1
+      t = t.next
 
   # returns the index of the Node containing the given element.
   # if the element does not exist in the List, return -1.
   def indexOf(self, elem):
     # To Do
-    pass # Remove this line
+    t = self.head
+    idx = 0
+    while t != None:
+      if t.element == elem:
+        return idx
+      idx = idx+1
+      t = t.next
+    return -1
   
   # returns true if the element exists in the List, return false otherwise.
   def contains(self, elem):
     # To Do
-    pass # Remove this line
+    t = self.head
+    while t != None:
+      if t.element == elem:
+        return True
+      t = t.next
+    return False
 
   # Makes a duplicate copy of the given List. Returns the reference of the duplicate list.
   def copyList(self):
     # To Do
-    pass # Remove this line
+    copy_h = None
+    copy_t = None
+    t = self.head
+
+    while t != None:
+      new_node = Node(t.element, None)
+      if copy_h == None:
+        copy_h = new_node
+        copy_t = new_node
+      else:
+        copy_t.next = new_node
+        copy_t = new_node
+      t = t.next
+    return copy_h
 
   # Makes a reversed copy of the given List. Returns the head reference of the reversed list.
   def reverseList(self):
     # To Do
-    pass # Remove this line
+    new_h = None
+    t = self.head
+    while t != None:
+      next_node = t.next
+      t.next = new_h
+      new_h = t
+      t = next_node
+
+    return new_h
   
   # inserts Node containing the given element at the given index
   # Check validity of index.
   def insert(self, elem, idx):
     # To Do
-    pass # Remove this line
+    new_node = Node(elem, None)
+
+    if idx < 0 or idx >= len(self.a):
+      return None
+    else:
+      if idx == 0:
+        new_node.next = self.head
+        self.head = new_node
+      else:
+        pre = self.nodeAt(idx-1)
+        new_node.next = pre.next
+        pre.next = new_node
+
+    return self.head
 
   # removes Node at the given index. returns element of the removed node.
   # Check validity of index. return None if index is invalid.
   def remove(self, idx):
     # To Do
-    pass # Remove this line
+    remove_node = None
+    if idx < 0 or idx >= len(self.a):
+      return None
+    else:
+      if idx == 0:
+        remove_node = self.head
+        self.head = self.head.next
+      else:
+        pre = self.nodeAt(idx - 1)
+        remove_node = pre.next
+        pre.next = remove_node.next
+    
+    r = remove_node.element
+    remove_node.element = None
+    remove_node.next = None
+
+    return r
+
   
   # Rotates the list to the left by 1 position.
   def rotateLeft(self):
     # To Do
-    pass # Remove this line
+    pre_h = self.head
+    self.head = self.head.next
+    tail = self.head
+    while tail.next != None:
+      tail = tail.next
+    tail.next = pre_h
+    pre_h.next = None
   
   
   # Rotates the list to the right by 1 position.
   def rotateRight(self):
     # To Do
-    pass # Remove this line
+    pre_h = self.head
+    tail = self.head
+
+    while tail.next.next != None:
+      tail = tail.next
+    
+    self.head = tail.next
+    tail.next = None
+    self.head.next = pre_h
 
 
 ################################################################################################
