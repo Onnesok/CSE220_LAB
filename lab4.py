@@ -16,41 +16,143 @@ class DoublyList:
   #  Creates a linked list using the values from the given array.
     self.head = None
     # To Do
-    pass # Remove this line
+    node = None
+    self.tail = None
+
+    for i in range(len(a)):
+      new_node = Node(a[i], None, None)
+
+      if self.head == None:
+       self.head = new_node
+       node = new_node
+      else:
+        node.next = new_node
+        new_node.prev = node
+        node = node.next
+
+      self.tail = new_node 
+
+
   
   # Counts the number of Nodes in the list
   def countNode(self):
     # To Do
-    pass # Remove this line
-  
+    node = self.head
+    cnt = 0
+
+    while node != None:
+      cnt+= 1
+      node = node.next
+
+    return cnt  
   # prints the elements in the list
   def forwardprint(self):
     # To Do
-    pass # Remove this line
+    node = self.head
+
+    while node != None:
+      if node.next == None:
+        print(node.element)
+      else:
+        print(node.element, end=", ")
+
+      node = node.next
 
   # prints the elements in the list backward
   def backwardprint(self):
     # To Do
-    pass # Remove this line
+    node = self.tail
+
+    while node != None:
+      if node.prev == None:
+        print(node.element)
+      else:
+        print(node.element, end = ", ")
+
+      node = node.prev
 
   # returns the reference of the at the given index. For invalid index return None.
   def nodeAt(self, idx):
     # To Do
-    pass # Remove this line
+    node = self.head
+
+    for i in range(idx):
+      node = node.next
+    return node
   
   # returns the index of the containing the given element. if the element does not exist in the List, return -1.
   def indexOf(self, elem):
     # To Do
-    pass # Remove this line
+    node = self.head
+    cnt = 0
+
+    while node.element != elem:
+      cnt += 1
+      if node.next == None:
+        cnt = -1
+        return cnt
+      node = node.next
+
+    return cnt
 
   # inserts containing the given element at the given index Check validity of index. 
   def insert(self, elem, idx):
     # To Do
-    pass # Remove this line
+    if idx < 0 or idx > self.countNode():
+      return None
+    
+    new_node = Node(elem, None, None)
+    if idx == 0:
+      new_node.next = self.head
+      self.head.prev = new_node
+      self.head = new_node
+    
+    elif idx == self.countNode():
+      prev = self.nodeAt(idx-1)
+      new_node.prev = prev
+      prev.next = new_node
+      self.tail = new_node
+    else:
+      prev = self.nodeAt(idx-1)
+      next_node = self.nodeAt(idx)
+      new_node.next = next_node
+      new_node.prev = prev
+      prev.next = new_node
+      next_node.prev = new_node
+
+
   # removes at the given index. returns element of the removed node. Check validity of index. return None if index is invalid.
   def remove(self, idx):
     # To Do
-    pass # Remove this line
+    if idx < 0 or idx > self.countNode():
+      return None
+    
+    if idx == 0:
+      new_node = self.head
+      next_node = new_node.next
+      self.head = next_node
+      next_node.prev = None
+      return str(new_node.element)
+
+    elif idx == self.countNode():
+      new_node = self.nodeAt(idx)
+      prev = new_node.prev
+      prev.next = None
+      self.tail = prev
+      new_node.prev = None
+
+      return str(new_node.element)
+
+    else:
+      new_node = self.nodeAt(idx)
+      next_node =  new_node.next
+      prev = new_node.prev
+      prev.next = next_node 
+      next_node.prev = prev
+      new_node.prev = None
+      new_node.next = None
+      return str(new_node.element)
+
 
 #########################################################################################################
 #####################################  Driver code  #####################################################
@@ -89,7 +191,7 @@ h2.backwardprint() # This should print: 40,30,20,10,85.
 print()
 h2.insert(95,3)
 h2.forwardprint() # This should print: 85,10,20,95,30,40.  
-h2.backwardprint() # This should print: 40,30,95,20,10,80.  
+h2.backwardprint() # This should print: 40,30,95,20,10,85.  
 
 print()
 h2.insert(75,6)
