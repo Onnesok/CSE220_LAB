@@ -127,14 +127,14 @@ class DoublyList:
     if idx < 0 or idx > self.countNode():
       return None
     
-    if idx == 0:
+    elif idx == 0:
       new_node = self.head
       next_node = new_node.next
       self.head = next_node
       next_node.prev = None
       return str(new_node.element)
 
-    elif idx == self.countNode():
+    elif idx == self.countNode()-1:
       new_node = self.nodeAt(idx)
       prev = new_node.prev
       prev.next = None
