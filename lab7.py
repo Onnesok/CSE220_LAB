@@ -1,3 +1,4 @@
+
 def keyidx(a):
     mx = a[0]
     mn = a[0]
