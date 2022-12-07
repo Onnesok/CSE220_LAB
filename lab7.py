@@ -53,5 +53,5 @@ class keyidx:
 
 x = [5, 7, -7, -5, -6, -3, -3]         
 a = keyidx(x)
-print(a.search(-8))
+print(a.search(-7))
 a.sort()
