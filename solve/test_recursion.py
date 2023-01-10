@@ -107,3 +107,5 @@ class lnk:
 # a = [10,20,30,40]
 # h1 = lnk(a)
 # (h1.rev(h1.head))
+
+# Test
