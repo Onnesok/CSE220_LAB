@@ -214,3 +214,6 @@ h3.backwardprint() # This should print: 70,60,40,30,20.
 print("Removed element: "+ h3.remove(4)) # This should print: Removed element: 70
 h3.forwardprint() # This should print: 20,30,40,60. 
 h3.backwardprint() # This should print: 60,40,30,20.
+
+
+# Doubly linked list
