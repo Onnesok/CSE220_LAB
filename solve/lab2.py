@@ -232,3 +232,5 @@ c11 = CircularArray(lin_arr10, 8, 7)
 c11.printFullLinear() # This should print: 10, 20, 5, None, None, None, None, None, 5, 40, 15, 25
 output = c10.intersection(c11)
 print(output) # This should print: [10, 20, 40]
+
+# Circular array
