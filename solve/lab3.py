@@ -335,3 +335,5 @@ h9.printList() # This should print: 10,20,30,40.
 # Rotates the list to the right by 1 position.
 h9.rotateRight()
 h9.printList() # This should print: 40,10,20,30.
+
+# Singly linked list
