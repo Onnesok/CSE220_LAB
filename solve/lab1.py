@@ -168,5 +168,5 @@ class cls:
 arr = [3,4,6,3,4,7,4,6,8,6,6]
 print(cls.repetation(arr))
 
-# Array
+# Linear array
 
