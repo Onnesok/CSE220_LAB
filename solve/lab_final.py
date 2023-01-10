@@ -19,3 +19,5 @@ def game(n, k, start = 0):
     
 
 print(game(5, 2))
+
+#lab_final
