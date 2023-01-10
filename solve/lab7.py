@@ -97,4 +97,7 @@ print ("HASH TABLE")
 print ("INDEX-ELEMENT")
 for i in range (9):
     print (str(i)+"\t"+hash_table[i])
+    
+
+# keyindex and hash
 
