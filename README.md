@@ -10,7 +10,7 @@
 ## clone / Download
 
 ```bash
-git clne https://github.com/Onnesok/CSE220_LAB
+git clone https://github.com/Onnesok/CSE220_LAB
 
 ```
 
